@@ -3,7 +3,7 @@ import G6 from '@antv/g6';
 
 export default function HomePage() {
   return (
-    <div>
+    <div className='h-full'>
       nihao
     </div>
   );
