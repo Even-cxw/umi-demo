@@ -5,12 +5,12 @@ import G6 from '@antv/g6';
 const data = {
   nodes: [
     { id: 'node0', size: 50,  x: 800, y: 800, label: '123'},
-    { id: 'node1', size: 30, type: 'rect'},
+    { id: 'node1', size: 30, type: 'rect', label:'456'},
     { id: 'node2', size: 30, type: 'circle'},
     { 
       id: 'node3', 
       size: 30,
-      type: 'star', // shape 类型
+      type: 'star', // shape 类型  https://g6.antv.antgroup.com/manual/middle/elements/nodes/default-node
       label: '五角星', // shape 标题
       style: { // shape 样式控制
         fill: 'yellow',// 填充色
@@ -37,7 +37,14 @@ const data = {
     { id: 'node16', size: 15 },
   ],
   edges: [
-    { source: 'node0', target: 'node1' },
+    { 
+      source: 'node0', 
+      target: 'node1' ,
+      style: {
+        endArrow: true, // 箭头 https://g6.antv.antgroup.com/manual/middle/elements/edges/arrow
+        startArrow: true
+      }
+    },
     { source: 'node0', target: 'node2' },
     { source: 'node0', target: 'node3' },
     { source: 'node0', target: 'node4' },
@@ -74,6 +81,7 @@ const Tutorital = () => {
         height: 600,
         plugins: [minimap], // 插件配置选项
         modes: {
+          // 具体参考 【核心概念/交互与事件/内置的Behavior】 https://g6.antv.antgroup.com/manual/middle/states/default-behavior
           default: [
             'drag-canvas',  // 拖拽canvas
             'zoom-canvas',   // 缩放canvas

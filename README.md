@@ -19,3 +19,17 @@
 - image
 - modelRect
 - donut
+
+
+
+### 布局
+
+#### 一般图
+```js
+graph = new G6.Graph()
+```
+
+#### 紧凑树布局
+```js
+graph = new G6.TreeGraph()
+```
