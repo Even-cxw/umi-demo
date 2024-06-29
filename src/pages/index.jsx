@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import yayJpg from '../assets/yay.jpg';
 import G6 from '@antv/g6';
+import {Link} from 'umi';
+import {Button} from 'antd';
 
 export default function HomePage() {
 
@@ -41,10 +43,26 @@ export default function HomePage() {
   //   console.log('c', c)
   // }, [])
 
+  const handleUndefined = (value) => {
+    if (value === undefined) return ''
+    if (value === null) return ''
+    return value
+  }
+
 
   return (
-    <div className='h-full'>
-      nihao
+    <div className='h-full flex items-center justify-center'>
+      <Link to="/docs">
+        <Button type="dashed">docs</Button>
+      </Link>
+      <br></br>
+      <Link className='/Antv/demo1' to="/Antv/demo1">
+        <Button type="dashed">antv-demo1</Button>  1. 修改canvas整体画布颜色
+      </Link>
+      <br></br>
+      <Link className='/Antv/demo1' to="/Antv/demo2">
+        <Button type="dashed">antv-demo2</Button>
+      </Link>
     </div>
   );
 }
