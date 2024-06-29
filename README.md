@@ -24,12 +24,14 @@
 
 ### 布局
 
-#### 一般图
+#### 一般图 （demo1）
 ```js
 graph = new G6.Graph()
 ```
 
-#### 紧凑树布局
+#### 紧凑树布局（demo2）
 ```js
 graph = new G6.TreeGraph()
 ```
+
+### 自定义交互事件mode（demo3）

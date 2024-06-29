@@ -4,31 +4,13 @@ import G6 from '@antv/g6';
 import { useWindowSize } from 'react-use';
 
 const data = 
-  { id: 'node0', "children": [
+  { id: 'node0', label: '0', "children": [
     { id: 'node1', "children": [{ id: 'node11'},]},
     { id: 'node2'},
     { id: 'node3'},
     { id: 'node4'},
   ]
 }
-  // edges: [
-  //   { source: 'node0', target: 'node1' },
-  //   { source: 'node0', target: 'node2' },
-  //   { source: 'node0', target: 'node3' },
-  //   { source: 'node0', target: 'node4' },
-  //   { source: 'node0', target: 'node5' },
-  //   { source: 'node1', target: 'node6' },
-  //   { source: 'node1', target: 'node7' },
-  //   { source: 'node2', target: 'node8' },
-  //   { source: 'node2', target: 'node9' },
-  //   { source: 'node2', target: 'node10' },
-  //   { source: 'node2', target: 'node11' },
-  //   { source: 'node2', target: 'node12' },
-  //   { source: 'node2', target: 'node13' },
-  //   { source: 'node3', target: 'node14' },
-  //   { source: 'node3', target: 'node15' },
-  //   { source: 'node3', target: 'node16' },
-  // ],
 
 const Tutorital = () => {
   const ref = React.useRef(null)
@@ -63,6 +45,7 @@ const Tutorital = () => {
         },
         defaultNode: {
           size: 26,
+          type: 'rect',
           anchorPoints: [
             [0, 0.5],
             [1, 0.5],
