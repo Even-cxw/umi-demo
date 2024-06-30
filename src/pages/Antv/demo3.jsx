@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import G6 from '@antv/g6';
 import { useWindowSize } from 'react-use';
+import {Button} from 'antd';
 
 const data = {
   nodes: [
@@ -60,7 +61,10 @@ const Tutorital = () => {
         width,
         height,
         modes: {
-          default: ['drag-canvas', 'zoom-canvas', 'drag-node']
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node'],
+          edit1: ['zoom-canvas'],
+          edit2: ['drag-node'],
+          edit3: ['drag-canvas'],
         },
         defaultNode: { // 默认节点
           type: 'circle',
@@ -125,8 +129,19 @@ const Tutorital = () => {
 
   }, [])
 
+  const handleClick = (type) => {
+    graph.setMode(type);
+  }
+
   // 修改画布颜色
-  return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}></div>
+  return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}>
+    <div style={{position: 'absolute'}}>
+      <Button type="dashed" onClick={() => {handleClick('edit1')}}>仅缩放</Button>
+      <Button type="dashed" onClick={() => {handleClick('edit2')}}>仅拖拽节点</Button>
+      <Button type="dashed" onClick={() => {handleClick('edit3')}}>仅拖拽画布</Button>
+      <Button type="dashed" onClick={() => {handleClick('default')}}>全部事件</Button>
+    </div>
+  </div>
 }
 
 export default Tutorital

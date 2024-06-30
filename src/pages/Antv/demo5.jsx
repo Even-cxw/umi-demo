@@ -5,41 +5,31 @@ import { useWindowSize } from 'react-use';
 
 const data = {
   nodes: [
-    { id: 'node0', size: 50,  x: 800, y: 800, title: '123'},
-    { id: 'node1', size: 30 },
-    { id: 'node2', size: 30 },
-    { id: 'node3', size: 30 },
-    { id: 'node4', size: 30 },
-    { id: 'node5', size: 30 },
-    { id: 'node6', size: 15 },
-    { id: 'node7', size: 15 },
-    { id: 'node8', size: 15 },
-    { id: 'node9', size: 15 },
-    { id: 'node10', size: 15 },
-    { id: 'node11', size: 15 },
-    { id: 'node12', size: 15 },
-    { id: 'node13', size: 15 },
-    { id: 'node14', size: 15 },
-    { id: 'node15', size: 15 },
-    { id: 'node16', size: 15 },
+    { id: 'center1', size: 30, label: '1', layoutType: 'center', y: 200, x: 250},
+    { id: 'center2', size: 30, label: '2', layoutType: 'center', y: 200, x: 150 },
+    { id: 'node2',label: '12', size: 30 },
+    { id: 'node3',label: '13', size: 30 },
+    { id: 'node4',label: '14', size: 30 },
+    { id: 'node5',label: '15', size: 30 },
+    { id: 'node6',label: '16', size: 15 },
+    { id: 'node7',label: '17', size: 15 },
+    { id: 'node8',label: '18', size: 15 },
+    { id: 'node9',label: '19', size: 15 },
   ],
   edges: [
-    { source: 'node0', target: 'node1' },
-    { source: 'node0', target: 'node2' },
-    { source: 'node0', target: 'node3' },
-    { source: 'node0', target: 'node4' },
-    { source: 'node0', target: 'node5' },
-    { source: 'node1', target: 'node6' },
-    { source: 'node1', target: 'node7' },
-    { source: 'node2', target: 'node8' },
-    { source: 'node2', target: 'node9' },
-    { source: 'node2', target: 'node10' },
-    { source: 'node2', target: 'node11' },
-    { source: 'node2', target: 'node12' },
-    { source: 'node2', target: 'node13' },
-    { source: 'node3', target: 'node14' },
-    { source: 'node3', target: 'node15' },
-    { source: 'node3', target: 'node16' },
+    { source: 'center1', target: 'node2' },
+    { source: 'center1', target: 'node2' },
+    { source: 'center1', target: 'node3' },
+    { source: 'center1', target: 'node8' },
+    { source: 'center1', target: 'node9' },
+    { source: 'center1', target: 'node3' },
+    { source: 'center1', target: 'node4' },
+    { source: 'center1', target: 'node7' },
+    { source: 'center1', target: 'node6' },
+    { source: 'center2', target: 'node5' },
+    { source: 'center2', target: 'node6' },
+    { source: 'center2', target: 'node7' },
+    { source: 'center2', target: 'node8' },
   ],
 };
 
@@ -62,7 +52,7 @@ const Tutorital = () => {
         height,
         // 
         modes: {
-          default: ['drag-canvas', 'zoom-canvas']
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
         defaultNode: {
           type: 'circle',
@@ -81,14 +71,17 @@ const Tutorital = () => {
           type: 'line'
         },
         layout: {
-          type: 'force',
-          preventOverlap: true,
-          linkDistance: d => {
-            if (d.source.id === 'node0') {
-              return 100;
+          // type:'concentric'
+          pipes: [
+            {
+              type: 'circular',
+              center: [200, 200],
+              nodesFilter: (node) => {
+                console.log('node', node);
+                return node.layoutType !== 'center' // 返回true时，表示使用此布局
+              }
             }
-            return 30;
-          },
+          ]
         },
         nodeStateStyles: {
           hover: {
@@ -101,7 +94,8 @@ const Tutorital = () => {
             stroke: 'blue',
             lineWidth: 3
           }
-        }
+        },
+        fitCenter: true,
       })
     }
     
