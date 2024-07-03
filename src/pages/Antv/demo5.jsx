@@ -50,7 +50,11 @@ const Tutorital = () => {
         container: ref.current,
         width,
         height,
-        // 
+        animate: true,
+        animateCfg: {
+          duration: 500, // Number，一次动画的时长
+          easing: 'linearEasing', // String，动画函数
+        },
         modes: {
           default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
@@ -71,7 +75,7 @@ const Tutorital = () => {
           type: 'line'
         },
         layout: {
-          // type:'concentric'
+          // type:'force'
           pipes: [
             {
               type: 'circular',

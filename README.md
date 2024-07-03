@@ -53,3 +53,6 @@ graph.on（'node:click'，evt =>{});
 
 - 流水线子图布局 `layout.pipes = []`
 1. 根据字段信息设置不同的布局格式
+
+
+### [插件](https://g6.antv.antgroup.com/api/plugins#edge-bundling) (demo6)
