@@ -5,7 +5,7 @@ import { useWindowSize } from 'react-use';
 
 const data = {
   nodes: [
-    { id: 'node0', size: 50,  x: 800, y: 800, title: '123'},
+    { id: 'node0', size: 50},
     { id: 'node1', size: 30 },
     { id: 'node2', size: 30 },
     { id: 'node3', size: 30 },
@@ -49,12 +49,13 @@ const Tutorital = () => {
   const { width, height } = useWindowSize();
 
   useEffect(() => {
-    if(!graph) {
-      // 实例化 Minimap
-      setTimeout(() => {
-        console.log('G6', G6);
-      }, 1000)
+    initGraph();
+    initGraphEvent();
+  }, [])
 
+
+  const initGraph = () => {
+    if(!graph) {
       // 实例化 Graph
       graph = new G6.Graph({
         container: ref.current,
@@ -62,7 +63,7 @@ const Tutorital = () => {
         height,
         // 
         modes: {
-          default: ['drag-canvas', 'zoom-canvas']
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
         defaultNode: {
           type: 'circle',
@@ -103,12 +104,12 @@ const Tutorital = () => {
           }
         }
       })
+      graph.data(data)
+      graph.render()
     }
-    
-    graph.data(data)
-  
-    graph.render()
+  }
 
+  const initGraphEvent = () => {
     graph.on('node:mouseenter', evt => {
       graph.setItemState(evt.item, 'hover', true)
     })
@@ -124,8 +125,7 @@ const Tutorital = () => {
     graph.on('edge:mouseleave', evt => {
       graph.setItemState(evt.item, 'hover', false)
     })
-
-  }, [])
+  }
 
   return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}></div>
 }

@@ -81,11 +81,11 @@ export default function HomePage() {
       </Link>
       <br></br>
       <Link to="/Antv/demo7">
-        <Button type="dashed">antv-demo7</Button> 
+        <Button type="dashed">antv-demo7</Button> 自定义节点动画
       </Link>
       <br></br>
       <Link to="/Antv/demo8">
-        <Button type="dashed">antv-demo8</Button> 
+        <Button type="dashed">antv-demo8</Button> 自定边
       </Link>
       <br></br>
       <Link to="/Antv/demo9">

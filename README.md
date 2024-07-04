@@ -121,9 +121,13 @@ graph.on（'node:click'，evt =>{});
 
 
 
-### demo7 [定义节点动画](https://g6.antv.antgroup.com/api/plugins#edge-bundling) 
+### demo7 [定义节点动画]
   - 中心区域 图片 放大缩小
   - 鼠标悬浮区域 进行放大缩小
+
+
+### demo8 自定边
+
 
 
 ---
