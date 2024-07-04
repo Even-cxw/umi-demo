@@ -5,11 +5,22 @@ import { useWindowSize } from 'react-use';
 
 const data = {
   nodes: [
-    { id: 'node0', size: 50, },
-    { id: 'node1', size: 30 },
+    { id: 'node0', size: 50,     anchorPoints: [
+      [0, 0.5],
+      [1, 0.5],
+    ],},
+    { id: 'node1', size: 50,    anchorPoints: [
+      [0, 0.5],
+      [1, 0.5],
+    ], },
+    { id: 'node2', size: 50 ,    anchorPoints: [
+      [0, 0.5],
+      [1, 0.5],
+    ],},
   ],
   edges: [
-    { source: 'node0', target: 'node1' },
+    { source: 'node0', target: 'node1', type: 'region-edge' },
+    { source: 'node0', target: 'node2', type: 'region-edge' },
   ],
 };
 
@@ -26,7 +37,24 @@ const Tutorital = () => {
 
   const initEdge = () => {
     G6.registerEdge('region-edge', {
-
+      draw(cfg, group) {
+        const startPoint = cfg.startPoint;
+        const endPoint = cfg.endPoint;
+        const shape = group.addShape('path', {
+          attrs: {
+            stroke: '#fff',
+            path: [
+              ['M', startPoint.x, startPoint.y],
+              ['L', endPoint.x / 3 + (2 / 3) * startPoint.x, startPoint.y], // 三分之一处
+              ['L', endPoint.x / 3 + (2 / 3) * startPoint.x, endPoint.y], // 三分之二处
+              ['L', endPoint.x, endPoint.y],
+            ],
+          },
+          // 在 G6 3.3 及之后的版本中，必须指定 name，可以是任意字符串，但需要在同一个自定义元素类型中保持唯一性
+          name: 'path-shape',
+        });
+        return shape;
+      },
     })
   }
 
@@ -39,7 +67,7 @@ const Tutorital = () => {
         height,
         // 
         modes: {
-          default: ['drag-canvas', 'zoom-canvas']
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
         defaultNode: {
           type: 'circle',
@@ -55,7 +83,8 @@ const Tutorital = () => {
           }
         },
         defaultEdge: {
-          type: 'line'
+          type: 'line',
+      
         },
         layout: {
           type: 'force',
