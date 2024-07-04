@@ -56,12 +56,80 @@ export default function HomePage() {
         <Button type="dashed">docs</Button>
       </Link>
       <br></br>
-      <Link className='/Antv/demo1' to="/Antv/demo1">
-        <Button type="dashed">antv-demo1</Button>  1. 修改canvas整体画布颜色
+      <Link to="/Antv/demo1">
+        <Button type="dashed">antv-demo1</Button>  修改canvas整体画布颜色
       </Link>
       <br></br>
-      <Link className='/Antv/demo1' to="/Antv/demo2">
-        <Button type="dashed">antv-demo2</Button>
+      <Link to="/Antv/demo2">
+        <Button type="dashed">antv-demo2</Button> 树布局
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo3">
+        <Button type="dashed">antv-demo3</Button> 自定义交互事件mode
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo4">
+        <Button type="dashed">antv-demo4</Button> 基础事件
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo5">
+        <Button type="dashed">antv-demo5</Button> 流水线子图布局：实现公司布局要求
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo6">
+        <Button type="dashed">antv-demo6</Button> 自定义节点
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo7">
+        <Button type="dashed">antv-demo7</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo8">
+        <Button type="dashed">antv-demo8</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo9">
+        <Button type="dashed">antv-demo9</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo10">
+        <Button type="dashed">antv-demo10</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo6">
+        <Button type="dashed">antv-demo6</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo11">
+        <Button type="dashed">antv-demo11</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo12">
+        <Button type="dashed">antv-demo12</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo13">
+        <Button type="dashed">antv-demo13</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo14">
+        <Button type="dashed">antv-demo14</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo15">
+        <Button type="dashed">antv-demo15</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo16">
+        <Button type="dashed">antv-demo16</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo17">
+        <Button type="dashed">antv-demo17</Button> 
+      </Link>
+      <br></br>
+      <Link to="/Antv/demo18">
+        <Button type="dashed">antv-demo18</Button> 
       </Link>
     </div>
   );
