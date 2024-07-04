@@ -18,45 +18,69 @@ const data = {
       label: '互联网访问',
       type:'region-image'
     },
-    // { 
-    //   id: 'node1', 
-    //   imgOptions: {
-    //     size: [170, 180], 
-    //     img: normal_base, 
-    //   },
-    //   label: '机构客户接入',
-    //   cardOptions: {
+    { 
+      id: 'node1', 
+      imgOptions: {
+        size: [170, 180], 
+        img: normal_base, 
+      },
+      label: '机构客户接入',
+      cardOptions: {
 
-    //   },
-    //   type:'region-image'
-    // },
-    // { 
-    //   id: 'node2', 
-    //   imgOptions: {
-    //     size: [120, 90], 
-    //     img: warning_base, 
-    //   },
-    //   label: '机构客户接入',
-    //   cardOptions: {
+      },
+      type:'region-image'
+    },
+    { 
+      id: 'node2', 
+      imgOptions: {
+        size: [120, 90], 
+        img: warning_base, 
+      },
+      label: '机构客户接入',
+      cardOptions: {
 
-    //   },
-    //   type:'region-image'
-    // },
-    // { 
-    //   id: 'node3', 
-    //   layoutType: 'center',
-    //   x: 1500,
-    //   y: 1500,
-    //   imgOptions: {
-    //     size: [200, 200], 
-    //     img: ping_score, 
-    //   },
-    //   label: '总头',
-    //   cardOptions: {
+      },
+      type:'region-image'
+    },
+    { 
+      id: 'node3', 
+      imgOptions: {
+        size: [120, 90], 
+        img: warning_base, 
+      },
+      label: '机构客户',
+      cardOptions: {
 
-    //   },
-    //   type:'region-image'
-    // },
+      },
+      type:'region-image'
+    },
+    { 
+      id: 'node4', 
+      imgOptions: {
+        size: [120, 90], 
+        img: warning_base, 
+      },
+      label: '机构客户',
+      cardOptions: {
+
+      },
+      type:'region-image'
+    },
+    { 
+      id: 'center1', 
+      layoutType: 'center',
+      x: 1200,
+      y: 1200,
+      imgOptions: {
+        size: [200, 200], 
+        img: ping_score, 
+      },
+      label: '总头',
+      cardOptions: {
+
+      },
+      type:'region-image'
+    },
   ],
   // edges: [
   //   { source: 'node0', target: 'node1' },
@@ -102,9 +126,9 @@ const Tutorital = () => {
             {
               type: 'circular',
               radius: 800,
-              center: [1500, 1500],
+              center: [1200, 1200],
               nodesFilter: (node) => {
-                console.log('node', node);
+                // console.log('node', node);
                 return node.layoutType !== 'center' // 返回true时，表示使用此布局
               }
             }
@@ -130,6 +154,14 @@ const Tutorital = () => {
     
     graph.data(data)
     graph.render()
+
+    // 添加hover事件
+    graph.on('node:mouseenter', evt => {
+      graph.setItemState(evt.item, 'hover', true)
+    })
+    graph.on('node:mouseleave', evt => {
+      graph.setItemState(evt.item, 'hover', false)
+    })
 
   }, [])
 
@@ -207,11 +239,70 @@ const Tutorital = () => {
 
           return keyShape
         },
-   
+
+        afterDraw(cfg, group) {
+          // 获取该节点上的第一个图形
+          const shape = group.get('children')[0];
+          // 该图形的动画 => 中心区域天假放大缩小动画
+          if(cfg.layoutType === 'center') {
+            shape.animate(
+              (ratio) => {
+                const scale = ratio <= 0.5 ? 1 + ratio : 2 - ratio;
+                return {
+                  matrix: [
+                    scale, 0, 0,
+                    0, scale, 0,
+                    0, 0, 1,
+                  ],
+                };
+              },
+              {
+                // 动画重复
+                repeat: true,
+                duration: 2000,
+                easing: 'easeCubic',
+              },
+            ); // 一次动画持续的时长为 3000，动画效果为 'easeCubic'
+          }
+        },
+
+        setState(name, value, item) {
+          console.log('name, value, item', name, value, item)
+          const group = item.getContainer();
+          const shape = group.get('children')[0]; // 获取图片 shape
+          const imgOptions = item.getModel().imgOptions;
+
+          if (name === 'hover' && value) {
+            // 鼠标悬浮时放大
+            shape.animate(
+              {
+                width: imgOptions.size[0] * 1.4,
+                height: imgOptions.size[1] * 1.4,
+                x: -imgOptions.size[0] * 1.4 / 2,
+                y: -imgOptions.size[1] * 1.4 / 2,
+              },
+              {
+                duration: 200,
+                easing: 'easeCubic',
+              }
+            );
+          } else if (name === 'hover' && !value) {
+            // 鼠标移出时恢复原大小
+            shape.animate(
+              {
+                width: imgOptions.size[0],
+                height: imgOptions.size[1],
+                x: -imgOptions.size[0] / 2,
+                y: -imgOptions.size[1] / 2,
+              },
+              {
+                duration: 200,
+                easing: 'easeCubic',
+              }
+            );
+          }
+        },
       },
-      // 继承内置节点类型的名字，例如基类 'single-node'，或 'circle', 'rect' 等
-      // 当不指定该参数则代表不继承任何内置节点类型
-      // 'rect',
     );
   }
 
