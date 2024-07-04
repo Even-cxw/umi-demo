@@ -11,6 +11,13 @@ export default defineConfig({
     { path: "/Antv/demo5", component: "Antv/demo5.jsx" },
     { path: "/Antv/demo6", component: "Antv/demo6.jsx" },
     { path: "/Antv/demo7", component: "Antv/demo7.jsx" },
+    { path: "/Antv/demo8", component: "Antv/demo8.jsx" },
+    { path: "/Antv/demo9", component: "Antv/demo9.jsx" },
+    { path: "/Antv/demo10", component: "Antv/demo10.jsx" },
+    { path: "/Antv/demo11", component: "Antv/demo11.jsx" },
+    { path: "/Antv/demo12", component: "Antv/demo12.jsx" },
+    { path: "/Antv/demo13", component: "Antv/demo13.jsx" },
+    { path: "/Antv/demo14", component: "Antv/demo14.jsx" },
   ],
 
   npmClient: "yarn",
