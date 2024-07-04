@@ -10,6 +10,7 @@ export default defineConfig({
     { path: "/Antv/demo4", component: "Antv/demo4.jsx" },
     { path: "/Antv/demo5", component: "Antv/demo5.jsx" },
     { path: "/Antv/demo6", component: "Antv/demo6.jsx" },
+    { path: "/Antv/demo7", component: "Antv/demo7.jsx" },
   ],
 
   npmClient: "yarn",

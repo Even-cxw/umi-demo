@@ -119,6 +119,11 @@ graph.on（'node:click'，evt =>{});
     );
 ```
 
+
+
+### demo6 [插件](https://g6.antv.antgroup.com/api/plugins#edge-bundling) 
+
+
 ---
 
 ## render渲染模式
