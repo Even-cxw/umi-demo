@@ -9,7 +9,7 @@ const data = {
     { id: 'node1', size: 100 },
   ],
   edges: [
-    { source: 'node0', target: 'node1', type: 'region-edge2', curveOffset: -30, label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', curveOffset: -30, label: '张江高科' },
     { source: 'node0', target: 'node1', type: 'region-edge2', curveOffset: -40, label: 1  },
     { source: 'node0', target: 'node1', type: 'region-edge1', curveOffset: -20, label: 1  },
     { source: 'node0', target: 'node1', type: 'region-edge1', curveOffset: -10 , label: 1 },
@@ -140,8 +140,11 @@ const Tutorital = () => {
         },
         defaultEdge: {
           type: 'polyline',
+          style: {stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)'},
           labelCfg: {
-            fill: '#fff',
+            style: {
+              fill: '#fff',
+            }
           }
         },
         nodeStateStyles: {

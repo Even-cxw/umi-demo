@@ -97,7 +97,7 @@ export default function HomePage() {
       </Link>
       <br></br>
       <Link to="/Antv/demo11">
-        <Button type="dashed">antv-demo11</Button> 
+        <Button type="dashed">antv-demo11</Button> 添加边的“透明-渐变色”
       </Link>
       <br></br>
       <Link to="/Antv/demo12">
