@@ -85,19 +85,15 @@ export default function HomePage() {
       </Link>
       <br></br>
       <Link to="/Antv/demo8">
-        <Button type="dashed">antv-demo8</Button> 自定边
+        <Button type="dashed">antv-demo8</Button> 自定边基础配置
       </Link>
       <br></br>
       <Link to="/Antv/demo9">
-        <Button type="dashed">antv-demo9</Button> 
+        <Button type="dashed">antv-demo9</Button> 设置边的背景
       </Link>
       <br></br>
       <Link to="/Antv/demo10">
-        <Button type="dashed">antv-demo10</Button> 
-      </Link>
-      <br></br>
-      <Link to="/Antv/demo6">
-        <Button type="dashed">antv-demo6</Button> 
+        <Button type="dashed">antv-demo10</Button> 节点中心进行连线 + 边动画效果
       </Link>
       <br></br>
       <Link to="/Antv/demo11">

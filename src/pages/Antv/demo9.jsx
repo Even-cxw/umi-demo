@@ -5,41 +5,11 @@ import { useWindowSize } from 'react-use';
 
 const data = {
   nodes: [
-    { id: 'node0', size: 50},
-    { id: 'node1', size: 30 },
-    { id: 'node2', size: 30 },
-    { id: 'node3', size: 30 },
-    { id: 'node4', size: 30 },
-    { id: 'node5', size: 30 },
-    { id: 'node6', size: 15 },
-    { id: 'node7', size: 15 },
-    { id: 'node8', size: 15 },
-    { id: 'node9', size: 15 },
-    { id: 'node10', size: 15 },
-    { id: 'node11', size: 15 },
-    { id: 'node12', size: 15 },
-    { id: 'node13', size: 15 },
-    { id: 'node14', size: 15 },
-    { id: 'node15', size: 15 },
-    { id: 'node16', size: 15 },
+    { id: 'node0', size: 50, label: 11},
+    { id: 'node1', size: 30, label: 22},
   ],
   edges: [
-    { source: 'node0', target: 'node1' },
-    { source: 'node0', target: 'node2' },
-    { source: 'node0', target: 'node3' },
-    { source: 'node0', target: 'node4' },
-    { source: 'node0', target: 'node5' },
-    { source: 'node1', target: 'node6' },
-    { source: 'node1', target: 'node7' },
-    { source: 'node2', target: 'node8' },
-    { source: 'node2', target: 'node9' },
-    { source: 'node2', target: 'node10' },
-    { source: 'node2', target: 'node11' },
-    { source: 'node2', target: 'node12' },
-    { source: 'node2', target: 'node13' },
-    { source: 'node3', target: 'node14' },
-    { source: 'node3', target: 'node15' },
-    { source: 'node3', target: 'node16' },
+    { source: 'node0', target: 'node1', label: 33 },
   ],
 };
 
@@ -66,20 +36,31 @@ const Tutorital = () => {
           default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
         defaultNode: {
-          type: 'circle',
           labelCfg: {
+            position: 'left',
             style: {
-              fill: '#000000A6',
-              fontSize: 10
-            }
-          },
-          style: {
-            stroke: '#72CC4A',
-            width: 150
+              background: {
+                fill: '#ffffff',
+                stroke: 'green',
+                padding: [3, 2, 3, 2],
+                radius: 2,
+                lineWidth: 3,
+              },
+            },
           }
         },
         defaultEdge: {
-          type: 'line'
+          labelCfg: {
+            autoRotate: true,
+            style: {
+              background: {
+                fill: '#ffffff',
+                stroke: '#000000',
+                padding: [2, 2, 2, 2],
+                radius: 2,
+              },
+            },
+          }
         },
         layout: {
           type: 'force',

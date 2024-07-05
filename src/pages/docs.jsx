@@ -61,7 +61,7 @@ const Tutorital = () => {
         container: ref.current,
         width,
         height,
-        // 
+        linkCenter: true, // 连接到节点的中心
         modes: {
           default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
