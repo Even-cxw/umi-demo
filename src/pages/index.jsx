@@ -102,6 +102,8 @@ export default function HomePage() {
       <br></br>
       <Link to="/Antv/demo12">
         <Button type="dashed">antv-demo12</Button> 
+        多个节点之间连线使用G6.Util.processParallelEdges(data.edges);
+        *注意⚠️*会导致动画消失
       </Link>
       <br></br>
       <Link to="/Antv/demo13">
