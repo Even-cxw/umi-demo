@@ -32,6 +32,7 @@ export default defineConfig({
     
     // TS
     { path: "/TS/demo1", component: "TS/demo1.tsx" },
+    // { path: "/TS/demo2", component: "TS/demo2.tsx" },
 
   ],
 

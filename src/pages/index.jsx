@@ -130,10 +130,10 @@ export default function HomePage() {
       children: (
         <Row>
           <Col span={8}>
-            <Link to="/React/demo1"><Button type="dashed">hooks</Button></Link>
+            <Link to="/React/demo1"><Button type="dashed">hooks概念理解</Button></Link> useMemo、useCallback、useState
           </Col>
           <Col span={8}>
-            <Link to="/React/demo1"><Button type="dashed">hooks</Button></Link>
+            <Link to="/React/demo2"><Button type="dashed">useState实践</Button></Link> 组件重复渲染是否会： 重新初始化useState里的数据
           </Col>
           <Col span={8}>
             <Link to="/React/demo1"><Button type="dashed">hooks</Button></Link>
