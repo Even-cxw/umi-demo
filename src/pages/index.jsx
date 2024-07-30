@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import yayJpg from "../assets/yay.jpg";
 import G6 from "@antv/g6";
 import { Link } from "umi";
-import { Button, Collapse, Row, Col } from "antd";
+import { Button, Collapse, Row, Col, Tag } from "antd";
 
 export default function HomePage() {
   let a = ["上海", "奥体", "东方", "南京"];
@@ -114,9 +114,22 @@ export default function HomePage() {
               <Button type="dashed">antv-demo11</Button> 添加边的“透明-渐变色”
             </Link>
           </Col>
-          <Col span={24}>
+          <Col span={24} className="mb-12 mt-12">
+            <Tag color="red">跟公司相关业务逻辑</Tag>
+          </Col>
+          <Col span={8}>
             <Link to="/Antv/demo12">
-              <Button type="dashed">antv-demo12</Button>
+              <Button type="dashed">antv-demo12</Button> 切换title主题、点击线有高亮效果
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo13">
+              <Button type="dashed">antv-demo13</Button> 显示隐藏子序列
+            </Link>
+          </Col>
+          <Col span={24}>
+            <Link to="/Antv/demo15">
+              <Button type="dashed">antv-demo15</Button>
               多个节点之间连线使用G6.Util.processParallelEdges(data.edges);
               *注意⚠️*会导致动画消失
             </Link>

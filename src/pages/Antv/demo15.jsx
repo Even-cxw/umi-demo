@@ -1,67 +1,109 @@
-
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react';
 import G6 from '@antv/g6';
 import { useWindowSize } from 'react-use';
 
 const data = {
   nodes: [
-    { id: 'node0', size: 50},
-    { id: 'node1', size: 30 },
-    { id: 'node2', size: 30 },
-    { id: 'node3', size: 30 },
-    { id: 'node4', size: 30 },
-    { id: 'node5', size: 30 },
-    { id: 'node6', size: 15 },
-    { id: 'node7', size: 15 },
-    { id: 'node8', size: 15 },
-    { id: 'node9', size: 15 },
-    { id: 'node10', size: 15 },
-    { id: 'node11', size: 15 },
-    { id: 'node12', size: 15 },
-    { id: 'node13', size: 15 },
-    { id: 'node14', size: 15 },
-    { id: 'node15', size: 15 },
-    { id: 'node16', size: 15 },
+    { id: 'node0', size: 100 },
+    { id: 'node1', size: 100 },
   ],
   edges: [
-    { source: 'node0', target: 'node1' },
-    { source: 'node0', target: 'node2' },
-    { source: 'node0', target: 'node3' },
-    { source: 'node0', target: 'node4' },
-    { source: 'node0', target: 'node5' },
-    { source: 'node1', target: 'node6' },
-    { source: 'node1', target: 'node7' },
-    { source: 'node2', target: 'node8' },
-    { source: 'node2', target: 'node9' },
-    { source: 'node2', target: 'node10' },
-    { source: 'node2', target: 'node11' },
-    { source: 'node2', target: 'node12' },
-    { source: 'node2', target: 'node13' },
-    { source: 'node3', target: 'node14' },
-    { source: 'node3', target: 'node15' },
-    { source: 'node3', target: 'node16' },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: '张江高科' },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: '张江高科1' },
+    { source: 'node0', target: 'node1', type: 'region-edge1', label: '张江高科2' },
+    { source: 'node0', target: 'node1', type: 'region-edge1', label: '张江高科3' },
+    { source: 'node0', target: 'node1', type: 'region-edge1', label: '张江高科4' },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: '张江高科5' },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
+    { source: 'node0', target: 'node1', type: 'region-edge2', label: 1 },
   ],
 };
 
-const Tutorital = () => {
-  const ref = React.useRef(null)
-  let graph = null
+const Tutorial = () => {
+  const ref = useRef(null);
   const { width, height } = useWindowSize();
+  let graph = null;
 
   useEffect(() => {
+    G6.Util.processParallelEdges(data.edges);
+    initEdge1();
+    initEdge2();
     initGraph();
-    initGraphEvent();
-  }, [])
+  }, []);
 
+  const initEdge1 = () => {
+    G6.registerEdge('region-edge1', {
+      afterDraw(cfg, group) {
+        const shape = group.get('children')[0];
+        const startPoint = shape.getPoint(0);
+        const circle = group.addShape('circle', {
+          attrs: {
+            x: startPoint.x,
+            y: startPoint.y,
+            fill: 'red',
+            r: 3,
+          },
+          name: 'circle-shape',
+        });
+        circle.animate(
+          (ratio) => {
+            const tmpPoint = shape.getPoint(ratio);
+            return {
+              x: tmpPoint.x,
+              y: tmpPoint.y,
+            };
+          },
+          {
+            repeat: true,
+            duration: 3000,
+          },
+        );
+      },
+    }, 'quadratic');
+  };
+
+  const initEdge2 = () => {
+    const lineDash = [4, 2, 1, 2];
+    G6.registerEdge('region-edge2', {
+      afterDraw(cfg, group) {
+        const shape = group.get('children')[0];
+        let index = 0;
+        shape.animate(
+          () => {
+            index++;
+            if (index > 9) {
+              index = 0;
+            }
+            return {
+              lineDash,
+              lineDashOffset: -index,
+            };
+          },
+          {
+            repeat: true,
+            duration: 3000,
+          },
+        );
+      },
+    }, 'quadratic');
+  };
 
   const initGraph = () => {
-    if(!graph) {
-      // 实例化 Graph
+    if (!graph) {
       graph = new G6.Graph({
         container: ref.current,
         width,
         height,
-        // 
+        linkCenter: true,
         modes: {
           default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
@@ -79,16 +121,13 @@ const Tutorital = () => {
           }
         },
         defaultEdge: {
-          type: 'line'
-        },
-        layout: {
-          type: 'force',
-          preventOverlap: true,
-          linkDistance: d => {
-            if (d.source.id === 'node0') {
-              return 100;
+          // type: 'polyline',
+          style: { stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)' },
+          labelCfg: {
+            autoRotate: true,
+            style: {
+              fill: '#fff',
             }
-            return 30;
           },
         },
         nodeStateStyles: {
@@ -102,32 +141,15 @@ const Tutorital = () => {
             stroke: 'blue',
             lineWidth: 3
           }
-        }
-      })
-      graph.data(data)
-      graph.render()
+        },
+        fitView: true
+      });
+      graph.data(data);
+      graph.render();
     }
-  }
+  };
 
-  const initGraphEvent = () => {
-    graph.on('node:mouseenter', evt => {
-      graph.setItemState(evt.item, 'hover', true)
-    })
+  return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}></div>;
+};
 
-    graph.on('node:mouseleave', evt => {
-      graph.setItemState(evt.item, 'hover', false)
-    })
-
-    graph.on('edge:mouseenter', evt => {
-      graph.setItemState(evt.item, 'hover', true)
-    })
-
-    graph.on('edge:mouseleave', evt => {
-      graph.setItemState(evt.item, 'hover', false)
-    })
-  }
-
-  return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}></div>
-}
-
-export default Tutorital
+export default Tutorial;
