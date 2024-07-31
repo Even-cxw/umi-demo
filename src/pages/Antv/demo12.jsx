@@ -20,7 +20,7 @@ const data = {
       id: 'node1', 
       size: 100, 
       type:'region-image',    
-      label: '沉鱼落雁',
+      label: '沉鱼落雁1',
       imgOptions: {
         size: [120, 80], 
         img: branch_base, 
@@ -37,11 +37,21 @@ const data = {
 
 const data1 = {
   nodes: [
-    { 
+    {
       id: 'node0', 
       size: 100, 
       type:'region-image',    
       label: '返璞归真',
+      imgOptions: {
+        size: [120, 80], 
+        img: branch_base, 
+      }, 
+    },
+    { 
+      id: 'node1', 
+      size: 100, 
+      type:'region-image',    
+      label: '沉鱼落雁',
       imgOptions: {
         size: [120, 80], 
         img: branch_base, 
@@ -53,17 +63,18 @@ const data1 = {
 const Tutorial = () => {
   const ref = useRef(null);
   const { width, height } = useWindowSize();
-  let graph = null;
+  let graphRef = useRef(null);
+
 
   useEffect(() => {
     initGraph();
   }, []);
 
   const initGraph = () => {
-    if (!graph) {
+    if (!graphRef.current) {
       // 注册graph节点
       initNode()
-      graph = new G6.Graph({
+      graphRef.current = new G6.Graph({
         container: ref.current,
         width,
         height,
@@ -86,7 +97,10 @@ const Tutorial = () => {
         },
         defaultEdge: {
           // type: 'polyline',
-          style: { stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)' },
+          style: { 
+            stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)', 
+            cursor: 'pointer',// 添加手指悬浮
+          },
           labelCfg: {
             autoRotate: true,
             style: {
@@ -103,16 +117,22 @@ const Tutorial = () => {
         edgeStateStyles: {
           hover: {
             stroke: 'blue',
-            lineWidth: 3
+            lineWidth: 5
+          },
+          click: {
+            stroke: 'red',
+            lineWidth: 5
           }
         },
-        fitView: true
+        fitView: true,
+        fitViewPadding: 100,
       });
-      graph.data(data);
-      graph.render();
+      graphRef.current.data(data);
+      graphRef.current.render();
+      initNodeEvent()
+      initEdgeEvent()
     }
   };
-
 
   const initNode=()=>{
     G6.registerNode(
@@ -136,6 +156,7 @@ const Tutorial = () => {
           let imgOptions = cfg.imgOptions;
           const keyShape = group.addShape('image', {
             attrs: {
+              cursor: 'pointer', // 添加悬浮手势
               x: - imgOptions.size[0] / 2,
               y: - imgOptions.size[1] / 2,
               width: imgOptions.size[0],
@@ -148,6 +169,7 @@ const Tutorial = () => {
           if (cfg.label) {
             group.addShape('text', {
               attrs: {
+                cursor: 'pointer', // 添加悬浮手势
                 // x: - imgOptions.size[0] / 2,
                 y: - imgOptions.size[1] / 2 - 20,
                 x: 0,
@@ -164,7 +186,9 @@ const Tutorial = () => {
 
           return keyShape
         },
-   
+        setState: (name, value, item) => {
+          console.log('name, value, item', name, value, item);
+        }
       },
       // 继承内置节点类型的名字，例如基类 'single-node'，或 'circle', 'rect' 等
       // 当不指定该参数则代表不继承任何内置节点类型
@@ -172,11 +196,36 @@ const Tutorial = () => {
     );
   }
 
+  const initNodeEvent=() => {
+    // 添加点击事件
+    let graph = graphRef.current;
+    graph.on('node:click', evt => {
+      console.log('evt', evt)
+      graph.setItemState(evt.item, 'hover', true)
+    })
+
+
+  }
+
+  const initEdgeEvent = () => {
+    let graph = graphRef.current;
+    graph.on('edge:click', evt => {
+      console.log('evt', evt)
+      graph.setItemState(evt.item, 'click', true)
+    })
+    graph.on('edge:mouseenter', evt => {
+      graph.setItemState(evt.item, 'hover', true)
+    })
+
+    graph.on('edge:mouseleave', evt => {
+      graph.setItemState(evt.item, 'hover', false)
+    })
+  }
+
   const handleTitle = () => {
-    // graph.data(data1);
-    // graph.render();
-    graph.changeData(data1)
-    graph.refresh()
+    // 解决数据切换-重新渲染问题
+    graphRef.current.changeData(data1)
+    graphRef.current.refresh()
   }
 
   return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}>

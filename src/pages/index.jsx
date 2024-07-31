@@ -119,12 +119,17 @@ export default function HomePage() {
           </Col>
           <Col span={8}>
             <Link to="/Antv/demo12">
-              <Button type="dashed">antv-demo12</Button> 切换title主题、点击线有高亮效果
+              <Button type="dashed">antv-demo12</Button> 切换title主题、点击线有高亮效果、添加手指
             </Link>
           </Col>
           <Col span={8}>
             <Link to="/Antv/demo13">
               <Button type="dashed">antv-demo13</Button> 显示隐藏子序列
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo14">
+              <Button type="dashed">antv-demo14</Button> 动态修改canvas宽高、最小可操作的缩放比例、control+1对图进行适应画布
             </Link>
           </Col>
           <Col span={24}>

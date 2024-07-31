@@ -1,72 +1,75 @@
-
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react';
 import G6 from '@antv/g6';
 import { useWindowSize } from 'react-use';
-
+import branch_base from '@/assets/branch_base.png'
+import {Button} from 'antd';
+import { Link } from "umi";
 const data = {
   nodes: [
-    { id: 'node0', size: 50},
-    { id: 'node1', size: 30 },
-    { id: 'node2', size: 30 },
-    { id: 'node3', size: 30 },
-    { id: 'node4', size: 30 },
-    { id: 'node5', size: 30 },
-    { id: 'node6', size: 15 },
-    { id: 'node7', size: 15 },
-    { id: 'node8', size: 15 },
-    { id: 'node9', size: 15 },
-    { id: 'node10', size: 15 },
-    { id: 'node11', size: 15 },
-    { id: 'node12', size: 15 },
-    { id: 'node13', size: 15 },
-    { id: 'node14', size: 15 },
-    { id: 'node15', size: 15 },
-    { id: 'node16', size: 15 },
+    { 
+      id: 'node0', 
+      size: 100, 
+      // type:'region-image',    
+      label: '吉星高照',
+      imgOptions: {
+        size: [120, 80], 
+        img: branch_base, 
+      }, 
+    },
+    { 
+      id: 'node1', 
+      size: 100, 
+      // type:'region-image',    
+      label: '沉鱼落雁1',
+      imgOptions: {
+        size: [120, 80], 
+        img: branch_base, 
+      }, 
+    },
   ],
   edges: [
-    { source: 'node0', target: 'node1' },
-    { source: 'node0', target: 'node2' },
-    { source: 'node0', target: 'node3' },
-    { source: 'node0', target: 'node4' },
-    { source: 'node0', target: 'node5' },
-    { source: 'node1', target: 'node6' },
-    { source: 'node1', target: 'node7' },
-    { source: 'node2', target: 'node8' },
-    { source: 'node2', target: 'node9' },
-    { source: 'node2', target: 'node10' },
-    { source: 'node2', target: 'node11' },
-    { source: 'node2', target: 'node12' },
-    { source: 'node2', target: 'node13' },
-    { source: 'node3', target: 'node14' },
-    { source: 'node3', target: 'node15' },
-    { source: 'node3', target: 'node16' },
+   {
+    source: 'node0',
+    target: 'node1',
+   }
   ],
 };
 
-const Tutorital = () => {
-  const ref = React.useRef(null)
-  let graph = null
+
+const Tutorial = () => {
+  const ref = useRef(null);
   const { width, height } = useWindowSize();
+  let graphRef = useRef(null);
+
+  useEffect(() => {
+    console.log('width', width)
+    console.log('height', height)
+    let graph = graphRef.current;
+    if (!graph || graph.get('destroyed')) return;
+    // 动态修改canvas宽高
+    graph.changeSize(width, height);
+  }, [width, height])
 
   useEffect(() => {
     initGraph();
-    initGraphEvent();
-  }, [])
-
+  }, []);
 
   const initGraph = () => {
-    if(!graph) {
-      // 实例化 Graph
-      graph = new G6.Graph({
+    if (!graphRef.current) {
+      // 注册graph节点
+      graphRef.current = new G6.Graph({
         container: ref.current,
         width,
         height,
-        // 
+        linkCenter: true,
+        minZoom: 0.1, // 最小可操作的缩放比例
         modes: {
-          default: ['drag-canvas', 'zoom-canvas', 'drag-node']
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node', 
+            'shortcuts-call' //  control 与 1，对图进行适应画布
+          ]
         },
         defaultNode: {
-          type: 'circle',
+          type: 'rect',
           labelCfg: {
             style: {
               fill: '#000000A6',
@@ -79,16 +82,13 @@ const Tutorital = () => {
           }
         },
         defaultEdge: {
-          type: 'line'
-        },
-        layout: {
-          type: 'force',
-          preventOverlap: true,
-          linkDistance: d => {
-            if (d.source.id === 'node0') {
-              return 100;
+          // type: 'polyline',
+          style: { stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)' },
+          labelCfg: {
+            autoRotate: true,
+            style: {
+              fill: '#fff',
             }
-            return 30;
           },
         },
         nodeStateStyles: {
@@ -100,34 +100,28 @@ const Tutorital = () => {
         edgeStateStyles: {
           hover: {
             stroke: 'blue',
-            lineWidth: 3
+            lineWidth: 5
+          },
+          click: {
+            stroke: 'red',
+            lineWidth: 5
           }
-        }
-      })
-      graph.data(data)
-      graph.render()
+        },
+        fitView: true,
+        fitViewPadding: 100,
+      });
+      graphRef.current.data(data);
+      graphRef.current.render();
     }
-  }
+  };
 
-  const initGraphEvent = () => {
-    graph.on('node:mouseenter', evt => {
-      graph.setItemState(evt.item, 'hover', true)
-    })
+  return <div ref={ref} style={{ width: '100%', height: '100%', backgroundColor: 'black' }}>
+    <div style={{position: 'absolute'}}>
+      <Link to="/">
+        <Button type="dashed">回到首页</Button>
+      </Link>
+    </div>
+  </div>;
+};
 
-    graph.on('node:mouseleave', evt => {
-      graph.setItemState(evt.item, 'hover', false)
-    })
-
-    graph.on('edge:mouseenter', evt => {
-      graph.setItemState(evt.item, 'hover', true)
-    })
-
-    graph.on('edge:mouseleave', evt => {
-      graph.setItemState(evt.item, 'hover', false)
-    })
-  }
-
-  return <div ref={ref} style={{ width, height, backgroundColor: 'black' }}></div>
-}
-
-export default Tutorital
+export default Tutorial;
