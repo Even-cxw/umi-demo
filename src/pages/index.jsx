@@ -119,12 +119,18 @@ export default function HomePage() {
           </Col>
           <Col span={8}>
             <Link to="/Antv/demo12">
-              <Button type="dashed">antv-demo12</Button> 切换title主题、点击线有高亮效果、添加手指
+              <Button type="dashed">antv-demo12</Button> 
+              <p>1.切换title主题</p>
+              <p>2.点击线有高亮效果,并且清空其他线路红色标记</p>
+              <p>3.添加手指悬浮效果</p>
             </Link>
           </Col>
           <Col span={8}>
             <Link to="/Antv/demo13">
-              <Button type="dashed">antv-demo13</Button> 显示隐藏子序列
+              <Button type="dashed">antv-demo13</Button> 
+              <p>1. 重新编写12的逻辑</p>
+              <p>2. 重新自定义node继承single-node</p>
+              <p>3. 添加node节点点击逻辑</p>
             </Link>
           </Col>
           <Col span={8}>

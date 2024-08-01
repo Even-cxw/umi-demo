@@ -26,11 +26,26 @@ const data = {
         img: branch_base, 
       }, 
     },
+    { 
+      id: 'node2', 
+      size: 100, 
+      type:'region-image',    
+      label: '沉鱼落雁1',
+      imgOptions: {
+        size: [120, 80], 
+        img: branch_base, 
+      }, 
+    },
   ],
   edges: [
    {
     source: 'node0',
     target: 'node1',
+    label: '123'
+   },
+   {
+    source: 'node1',
+    target: 'node2',
    }
   ],
 };
@@ -161,7 +176,7 @@ const Tutorial = () => {
               y: - imgOptions.size[1] / 2,
               width: imgOptions.size[0],
               height: imgOptions.size[1],
-              img: imgOptions.img
+              img: imgOptions.img,
             },
             name: 'region-image-shape'
           });
@@ -203,13 +218,20 @@ const Tutorial = () => {
       console.log('evt', evt)
       graph.setItemState(evt.item, 'hover', true)
     })
-
-
   }
+
+  // 清除图上所有边的 focus 状态及相应样式
+  const clearClickEdgeState = (graph) => {
+    const focusEdges = graph.findAllByState('edge', 'click');
+    focusEdges.forEach((fedge) => {
+      graph.setItemState(fedge, 'click', false);
+    });
+  };
 
   const initEdgeEvent = () => {
     let graph = graphRef.current;
     graph.on('edge:click', evt => {
+      clearClickEdgeState(graph)
       console.log('evt', evt)
       graph.setItemState(evt.item, 'click', true)
     })
