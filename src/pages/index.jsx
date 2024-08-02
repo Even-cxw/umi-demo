@@ -145,6 +145,16 @@ export default function HomePage() {
               *注意⚠️*会导致动画消失
             </Link>
           </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo16">
+              <Button type="dashed">antv-demo16</Button> 测试全局缩放问题 - 继续13开发
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo17">
+              <Button type="dashed">antv-demo17</Button> 测试全局缩放问题2 - 继续16开发
+            </Link>
+          </Col>
         </Row>
       )
     },
