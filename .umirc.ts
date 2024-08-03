@@ -39,6 +39,14 @@ export default defineConfig({
     
     // TS
     { path: "/TS/demo1", component: "TS/demo1.tsx" },
+    { path: "/TS/demo2", component: "TS/demo2.tsx" },
+    { path: "/TS/demo3", component: "TS/demo3.tsx" },
+    { path: "/TS/demo4", component: "TS/demo4.tsx" },
+    { path: "/TS/demo5", component: "TS/demo5.tsx" },
+    { path: "/TS/demo6", component: "TS/demo6.tsx" },
+    { path: "/TS/demo7", component: "TS/demo7.tsx" },
+    { path: "/TS/demo8", component: "TS/demo8.tsx" },
+
     // { path: "/TS/demo2", component: "TS/demo2.tsx" },
 
   ],

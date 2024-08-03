@@ -213,15 +213,46 @@ export default function HomePage() {
       label: "TS",
       children: (
         <Row>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
+          <Col span={8}>
+            <Link to="/TS/demo1">
+              <Button type="dashed">TS-demo1</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo2">
+              <Button type="dashed">TS-demo2</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo3">
+              <Button type="dashed">TS-demo3</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo4">
+              <Button type="dashed">TS-demo4</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo5">
+              <Button type="dashed">TS-demo5</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo6">
+              <Button type="dashed">TS-demo6</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo7">
+              <Button type="dashed">TS-demo7</Button>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/TS/demo8">
+              <Button type="dashed">TS-demo8</Button>
+            </Link>
+          </Col>
         </Row>
       ),
     },
