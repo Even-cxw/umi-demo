@@ -21,6 +21,10 @@ export default defineConfig({
     { path: "/Antv/demo15", component: "Antv/demo15.jsx" },
     { path: "/Antv/demo16", component: "Antv/demo16.jsx" },
     { path: "/Antv/demo17", component: "Antv/demo17.jsx" },
+    { path: "/Antv/demo18", component: "Antv/demo18.jsx" },
+    { path: "/Antv/demo19", component: "Antv/demo19.jsx" },
+    // { path: "/Antv/antv1", component: "Antv/antv1.jsx" },
+
 
     // react
     { path: "/React/demo1", component: "React/demo1.jsx" },

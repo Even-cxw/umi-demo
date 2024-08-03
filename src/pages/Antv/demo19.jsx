@@ -30,9 +30,8 @@ const data = {
     {
       id: 'node2',
       size: 100,
-      visible: false,
       type: 'region-image',
-      label: '沉鱼落雁1',
+      label: '沉鱼落雁2',
       imgOptions: {
         size: [120, 80],
         img: branch_base,
@@ -48,34 +47,88 @@ const data = {
     {
       source: 'node1',
       target: 'node2',
-    }
+    },
   ],
 };
 
-const data1 = {
-  nodes: [
+const childrenNode = {
+  nodes:[
     {
-      id: 'node0',
-      size: 100,
+      parent: 'node0',
+      id: 'children2',
       type: 'region-image',
-      label: '返璞归真',
+      label: '吉星高照-熊孩子1',
+      size: 100,
       imgOptions: {
         size: [120, 80],
         img: branch_base,
       },
     },
     {
-      id: 'node1',
+      parent: 'node0',
+      id: 'children3',
       size: 100,
       type: 'region-image',
-      label: '沉鱼落雁',
+      label: '吉星高照-熊孩子2',
       imgOptions: {
         size: [120, 80],
         img: branch_base,
       },
     },
-  ],
-};
+    {
+      parent: 'node0',
+      id: 'children21',
+      type: 'region-image',
+      label: '吉星高照-熊孩子11',
+      size: 100,
+      imgOptions: {
+        size: [120, 80],
+        img: branch_base,
+      },
+    },
+    {
+      parent: 'node0',
+      id: 'children31',
+      size: 100,
+      type: 'region-image',
+      label: '吉星高照-熊孩子21',
+      imgOptions: {
+        size: [120, 80],
+        img: branch_base,
+      },
+    },
+    {
+      parent: 'node1',
+      id: 'children4',
+      size: 100,
+      type: 'region-image',
+      label: '沉鱼落雁1-熊孩子2',
+      imgOptions: {
+        size: [120, 80],
+        img: branch_base,
+      },
+    },
+    {
+      parent: 'node1',
+      id: 'children5',
+      size: 100,
+      type: 'region-image',
+      label: '沉鱼落雁1-熊孩子5',
+      imgOptions: {
+        size: [120, 80],
+        img: branch_base,
+      },
+    },
+  ]
+}
+
+childrenNode.nodes.forEach(node => node.visible = false);
+
+
+const graphData = {
+  nodes: data.nodes.concat(childrenNode.nodes),
+  edges: data.edges
+}
 
 const filterNum = (num) => {
   return Math.round((num) * 100) / 100;
@@ -103,9 +156,34 @@ const Tutorial = () => {
       console.log('width', width)
       graph.changeSize(leftStyle.width, height);// 重新改变花布
     } else {
+      // 初始化布局
+      initLayout()
       initGraph(leftStyle.width, height)
     }
   }, [leftStyle.width, width])
+
+  const initLayout = () => {
+    // layout for the first layer nodes
+    const gridLayout = new G6.Layout['grid']({
+      rows: 1,
+      width,
+      sortBy: 'id'
+    });
+    // gridLayout.init(data);
+    gridLayout.init(data);
+    gridLayout.execute()
+    // console.log(data);
+
+    const gridLayout1 = new G6.Layout['grid']({
+      rows: 1,
+      width,
+      sortBy: 'id',
+      begin: [0, 400]
+    });
+    // gridLayout.init(data);
+    gridLayout1.init(childrenNode);
+    gridLayout1.execute()
+  }
 
   const initGraph = (width, height) => {
     if (!graphRef.current) {
@@ -162,7 +240,7 @@ const Tutorial = () => {
         fitView: true,
         fitViewPadding: 100,
       });
-      graphRef.current.data(data);
+      graphRef.current.data(graphData);
       graphRef.current.render();
       initNodeEvent();
       initEdgeEvent();
@@ -258,37 +336,36 @@ const Tutorial = () => {
       console.log('111111evt', e);
       const nodeId = e.item.getID();
       const nodeData = graph.findById(nodeId).getModel(); // 当前模块的“状态数据”
-      debugger;
-
-      // Adding new child nodes
-      const newNodes = [];
-      for (let i = 0; i < 3; i++) {
-        newNodes.push({
-          id: `${nodeId}-child-${i}`,
-          label: `Child ${i + 1}`,
-          size: 100,
-          type: 'region-image',
-          label: '子节点',
-          imgOptions: {
-            size: [120, 80],
-            img: branch_base,
-          },
-          x: nodeData.x,
-          y: nodeData.y
-        });
-      }
-
-      // Add nodes and edges
-      graph.addItem('node', newNodes);
-      newNodes.forEach(node => {
-        graph.addItem('edge', {
-          source: nodeId,
-          target: node.id
-        });
+      // debugger;
+      // 展示子节点逻辑
+      const childrenLayoutNodes = [];
+      childrenNode.nodes.forEach(node => {
+        if (nodeId === node.parent) {
+          graph.showItem(node.id);
+          childrenLayoutNodes.push(node);
+        }
+        else graph.hideItem(node.id);
       });
 
-      // Refresh the graph
-      graph.refresh();
+      // 自己展示子节点逻辑
+      // let newNodes = childrenNode.nodes.filter(item => item.parent === nodeId)
+      // console.log('newNodes', newNodes)
+      // // layout for the first layer nodes
+      // const gridLayout = new G6.Layout['grid']({
+      //   rows: 1,
+      //   width,
+      //   sortBy: 'id',
+      //   begin: [0, 500]
+      // });
+      // gridLayout.init({nodes: newNodes});
+      // gridLayout.execute()
+      // childrenNode.nodes.forEach(node => {
+      //   if (nodeId === node.parent) {
+      //     graph.showItem(node.id);
+      //   }
+      //   else graph.hideItem(node.id);
+      // })
+   
     });
   };
 
@@ -321,10 +398,6 @@ const Tutorial = () => {
     });
   };
 
-  const handleTitle = () => {
-    graphRef.current.changeData(data1);
-    graphRef.current.refresh();
-  };
 
   return (
     <div
@@ -345,10 +418,10 @@ const Tutorial = () => {
             <Link to="/">
               <Button type="dashed">回到首页</Button>
             </Link>
-            <Button type="dashed" onClick={handleTitle}>切换标题</Button>
+            {/* <Button type="dashed" onClick={handleTitle}>切换标题</Button> */}
             <Button type="dashed" onClick={() => {setLeftWidthNum(15)}}>缩放右侧</Button>
             <Button type="dashed" onClick={() => {setLeftWidthNum(30)}}>扩展右侧</Button>
-            <Button type="dashed" onClick={() => {graphRef.current.showItem('node2')}}>显示某个节点</Button>
+            {/* <Button type="dashed" onClick={showChildren}>显示子节点</Button> */}
           </div>
         </div>
    

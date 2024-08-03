@@ -152,7 +152,22 @@ export default function HomePage() {
           </Col>
           <Col span={8}>
             <Link to="/Antv/demo17">
-              <Button type="dashed">antv-demo17</Button> 测试全局缩放问题2 - 继续16开发
+              <Button type="dashed">antv-demo17</Button> 测试全局缩放问题2、显示某个节点按钮 - 继续16开发
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo18">
+              <Button type="dashed">demo18</Button>
+              <p>点击节点+子节点信息</p>
+              <p>初始化状态时 - 分配子节点布局：有弊端 开始计算量比较大，不能动态生成</p>
+              <p>学习动态布局方式 - 继续17开发</p>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo19">
+              <Button type="dashed">demo19</Button>
+              <p></p>
+              <p>继续18开发</p>
             </Link>
           </Col>
         </Row>
