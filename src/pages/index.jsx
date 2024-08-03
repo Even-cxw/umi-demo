@@ -215,7 +215,8 @@ export default function HomePage() {
         <Row>
           <Col span={8}>
             <Link to="/TS/demo1">
-              <Button type="dashed">TS-demo1</Button>
+              <Button type="dashed">TS-demo1</Button> 
+              学习数组接口
             </Link>
           </Col>
           <Col span={8}>
