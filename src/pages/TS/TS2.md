@@ -64,8 +64,14 @@ interface IGraphData<T=INodesOBj, N=IEdges> {
 ### 函数中定义泛形
 
 ```ts
+// 函数表达式中定义
 const fn = <T>(data: T):T {
   return data
+}
+
+// 函数声明中定义
+function identity<T>(value: T): T {
+    return value;
 }
 ```
 
