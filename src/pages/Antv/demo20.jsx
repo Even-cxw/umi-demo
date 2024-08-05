@@ -5,13 +5,24 @@ import branch_base from '@/assets/branch_base.png'
 import { Button } from 'antd';
 import { Link } from "umi";
 
+// 将字符串10个字符做分割
+const splitlabel = (label, num) => {
+  let result = [];
+  // 循环遍历字符串，每次取10个字符
+  for (let i = 0; i < label.length; i += 10) {
+    result.push(label.slice(i, i + 10));
+  }
+  return result;
+}
+
+
 const data = {
   nodes: [
     {
       id: 'node0',
       size: 100,
       type: 'region-image',
-      label: '吉星高照',
+      label: 'WGQ040732-C3850-168.37.0.1-KHJR.htscit.com',
       imgOptions: {
         size: [120, 80],
         img: branch_base,
@@ -129,6 +140,7 @@ childrenNode.edges = createEdges(childrenNode.nodes)
 // 将子节点线隐藏
 childrenNode.edges.forEach(node => node.visible = false);
 
+// 创建子节点的链接线
 function createEdges(nodes) {
   let edges = []
   nodes.forEach((item, i) => {
@@ -190,27 +202,50 @@ const Tutorial = () => {
     gridLayout.execute()
     // console.log(data);
 
-    // const gridLayout1 = new G6.Layout['grid']({
-    //   rows: 1,
-    //   width,
-    //   sortBy: 'id',
-    //   begin: [0, 400]
-    // });
-    // // gridLayout.init(data);
-    // gridLayout1.init(childrenNode);
-    // gridLayout1.execute()
+
   }
 
   const initGraph = (width, height) => {
     if (!graphRef.current) {
       initNode();
+      const tooltip = new G6.Tooltip({
+        offsetX: 10,
+        offsetY: 10,
+        // the types of items that allow the tooltip show up
+        // 允许出现 tooltip 的 item 类型
+        itemTypes: ['edge'],
+        // custom the tooltip's content
+        // 自定义 tooltip 内容
+        getContent: (e) => {
+          const outDiv = document.createElement('div');
+          outDiv.style.width = 'fit-content';
+          //outDiv.style.padding = '0px 0px 20px 0px';
+          outDiv.innerHTML = `
+            <h4>Custom Content</h4>
+            <ul>
+              <li>Type: ${e.item.getType()}</li>
+            </ul>
+            <ul>
+              <li>Label: ${e.item.getModel().label || e.item.getModel().id}</li>
+            </ul>`;
+          return outDiv;
+        },
+      });
       graphRef.current = new G6.Graph({
         container: graphDom.current,
         width,
         height,
         linkCenter: true,
+        // renderer: 'svg', // 设置 renderer 为 'svg'
+        plugins: [tooltip],
         modes: {
-          default: ['drag-canvas', 'zoom-canvas', 'drag-node', 'shortcuts-call']
+          default: [
+            'drag-canvas', 
+            'zoom-canvas', 
+            'drag-node', 
+            'shortcuts-call', 
+            // 'activate-relations'
+          ]
         },
         defaultNode: {
           type: 'rect',
@@ -299,21 +334,43 @@ const Tutorial = () => {
               width: imgOptions.size[0],
               height: imgOptions.size[1],
               img: imgOptions.img,
+              // opacity: 0.5
             },
             draggable: true,
             name: 'region-image-shape'
           });
 
           if (cfg.label) {
+            let text1 = '(00025268)'
+            let text2 = '(00025271)'
+            let textArr = splitlabel(cfg.label)
+            let y = imgOptions.size[1] / 2 + 20
+            textArr.forEach(item => {
+              group.addShape('text', {
+                attrs: {
+                  cursor: 'pointer',
+                  y,
+                  x: 0,
+                  text: item,
+                  textAlign: 'center',
+                  textBaseline: 'middle',
+                  fontSize: 12,
+                  fill: '#fff',
+                  draggable: true,
+                },
+                name: 'region-image-label'
+              });
+              y +=13;
+            })
             group.addShape('text', {
               attrs: {
                 cursor: 'pointer',
-                y: -imgOptions.size[1] / 2 - 20,
+                y,
                 x: 0,
-                text: cfg.label,
+                text: text1,
                 textAlign: 'center',
                 textBaseline: 'middle',
-                fontSize: 26,
+                fontSize: 12,
                 fill: '#fff',
                 draggable: true,
               },
@@ -415,6 +472,11 @@ const Tutorial = () => {
     graph.on('edge:mouseleave', evt => {
       graph.setItemState(evt.item, 'hover', false);
     });
+    graph.on('canvas:click', env => {
+      clearClickNodeState(graph);
+      clearClickEdgeState(graph);
+      // graph.refresh()
+    })
   };
 
 

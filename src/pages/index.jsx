@@ -166,8 +166,18 @@ export default function HomePage() {
           <Col span={8}>
             <Link to="/Antv/demo19">
               <Button type="dashed">demo19</Button>
-              <p></p>
+              <p>点击节点时 - 分配子节点布局</p>
+              <p>点击节点时 - 添加节点之间连线</p>
               <p>继续18开发</p>
+            </Link>
+          </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo20">
+              <Button type="dashed">demo20</Button>
+              <p>添加点击canvas事件</p>
+              <p>添加线line悬浮展示内容</p>
+              <p>添加label分段</p>
+              <p>继续19开发</p>
             </Link>
           </Col>
         </Row>
