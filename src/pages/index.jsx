@@ -177,6 +177,7 @@ export default function HomePage() {
               <p>添加点击canvas事件</p>
               <p>添加线line悬浮展示内容</p>
               <p>添加label分段</p>
+              <p>添加网格图 grid</p>
               <p>继续19开发</p>
             </Link>
           </Col>

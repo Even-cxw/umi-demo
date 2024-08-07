@@ -208,6 +208,14 @@ const Tutorial = () => {
   const initGraph = (width, height) => {
     if (!graphRef.current) {
       initNode();
+      const grid = new G6.Grid({
+        cell: 50, // 田字格的大小
+        line: {
+          fill: 'red',
+          stroke: 'red', // 网格线的颜色
+          lineWidth: 1,      // 网格线的宽度
+        },
+      });
       const tooltip = new G6.Tooltip({
         offsetX: 10,
         offsetY: 10,
@@ -237,7 +245,7 @@ const Tutorial = () => {
         height,
         linkCenter: true,
         // renderer: 'svg', // 设置 renderer 为 'svg'
-        plugins: [tooltip],
+        plugins: [tooltip, grid],
         modes: {
           default: [
             'drag-canvas', 
@@ -491,7 +499,8 @@ const Tutorial = () => {
       {/* 占内容区域的百分之70% */}
       <div ref={leftDom} 
         style={{
-          backgroundColor: 'black', 
+          // backgroundColor: 'rgba(111,222,333,.8)', 
+          // opacity: 0.99,
           width: `${100 - leftWidthNum}%` 
         }}>
         <div ref={graphDom}>
