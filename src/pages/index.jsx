@@ -268,6 +268,17 @@ export default function HomePage() {
         </Row>
       ),
     },
+    {
+      key: "4",
+      label: "antd",
+      children: (
+        <Row>
+          <Col span={8}>
+            <Link to="/antd/demo1"><Button type="dashed">antd-demo1</Button></Link>
+          </Col>
+        </Row>
+      )
+    }
   ];
 
 

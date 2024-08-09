@@ -48,7 +48,8 @@ export default defineConfig({
     { path: "/TS/demo7", component: "TS/demo7.tsx" },
     { path: "/TS/demo8", component: "TS/demo8.tsx" },
 
-    // { path: "/TS/demo2", component: "TS/demo2.tsx" },
+    // antd
+    { path: "/antd/demo1", component: "antd/demo1.jsx" },
 
   ],
 
