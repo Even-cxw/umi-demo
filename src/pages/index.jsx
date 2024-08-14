@@ -181,6 +181,13 @@ export default function HomePage() {
               <p>继续19开发</p>
             </Link>
           </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo21">
+              <Button type="dashed">demo21</Button>
+              <p>测试changeData</p>
+              <p>测试refresh</p>
+            </Link>
+          </Col>
         </Row>
       )
     },
