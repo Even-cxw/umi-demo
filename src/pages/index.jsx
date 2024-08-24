@@ -188,6 +188,11 @@ export default function HomePage() {
               <p>测试refresh</p>
             </Link>
           </Col>
+          <Col span={8}>
+            <Link to="/Antv/demo22">
+              <Button type="dashed">demo22</Button>
+            </Link>
+          </Col>
         </Row>
       )
     },
