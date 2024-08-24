@@ -53,6 +53,13 @@ export default defineConfig({
     // antd
     { path: "/antd/demo1", component: "antd/demo1.jsx" },
 
+    // CSS
+    { path: "/CSS/demo1", component: "CSS/demo1.tsx" },
+    { path: "/CSS/demo2", component: "CSS/demo2.tsx" },
+    { path: "/CSS/demo3", component: "CSS/demo3.tsx" },
+    { path: "/CSS/demo4", component: "CSS/demo4.tsx" },
+
+
   ],
 
   npmClient: "yarn",
