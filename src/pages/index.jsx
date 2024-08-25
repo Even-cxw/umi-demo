@@ -295,8 +295,8 @@ export default function HomePage() {
       key: "5",
       label: "CSS",
       children: (
-        <div className="grid grid-cols-3 gap-5">
-          <Link to="/CSS/demo1"><Button type="dashed">CSS-demo1</Button></Link>
+        <div className="grid grid-cols-3 gap-5 ">
+          <Link to="/CSS/demo1"><Button type="dashed">CSS-demo1</Button>1. 学习gird</Link>
           <Link to="/CSS/demo2"><Button type="dashed">CSS-demo2</Button></Link>
           <Link to="/CSS/demo3"><Button type="dashed">CSS-demo3</Button></Link>
           <Link to="/CSS/demo4"><Button type="dashed">CSS-demo4</Button></Link>
