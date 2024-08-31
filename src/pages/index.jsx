@@ -303,6 +303,18 @@ export default function HomePage() {
         </div>
       )
     },
+    {
+      key: "6",
+      label: "Javascript",
+      children: (
+        <div className="grid grid-cols-3 gap-5 ">
+          <Link to="/Javascript/demo1"><Button type="dashed">Javascript-demo1</Button></Link>
+          <Link to="/Javascript/demo2"><Button type="dashed">Javascript-demo2</Button></Link>
+          <Link to="/Javascript/demo3"><Button type="dashed">Javascript-demo3</Button></Link>
+          <Link to="/Javascript/demo4"><Button type="dashed">Javascript-demo4</Button></Link>
+        </div>
+      )
+    },
   ]
 
 

@@ -59,6 +59,10 @@ export default defineConfig({
     { path: "/CSS/demo3", component: "CSS/demo3.tsx" },
     { path: "/CSS/demo4", component: "CSS/demo4.tsx" },
 
+    // Javascript
+    { path: "/Javascript/demo1", component: "Javascript/demo1.tsx" },
+    { path: "/Javascript/demo2", component: "Javascript/demo2.tsx" },
+    { path: "/Javascript/demo3", component: "Javascript/demo3.tsx" },
 
   ],
 
