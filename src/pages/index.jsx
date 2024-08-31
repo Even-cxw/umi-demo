@@ -299,7 +299,7 @@ export default function HomePage() {
           <Link to="/CSS/demo1"><Button type="dashed">CSS-demo1</Button>1. 学习gird</Link>
           <Link to="/CSS/demo2"><Button type="dashed">CSS-demo2</Button></Link>
           <Link to="/CSS/demo3"><Button type="dashed">CSS-demo3</Button></Link>
-          <Link to="/CSS/demo4"><Button type="dashed">CSS-demo4</Button></Link>
+          <Link to="/CSS/demo4"><Button type="dashed">CSS-demo4</Button>尝试悬浮hover效果</Link>
         </div>
       )
     },
