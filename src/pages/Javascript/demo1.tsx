@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "@/Components/Title";
+import Title from "@/components/Title";
 
 const Demo1: React.FC = () => {
   return (

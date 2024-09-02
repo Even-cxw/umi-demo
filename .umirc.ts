@@ -65,7 +65,7 @@ export default defineConfig({
     { path: "/Javascript/demo3", component: "Javascript/demo3.tsx" },
 
   ],
-
+  // history: { type: "hash" },
   npmClient: "yarn",
   tailwindcss: {},
   plugins: ["@umijs/plugins/dist/tailwindcss"],
