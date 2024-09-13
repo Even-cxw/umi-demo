@@ -208,8 +208,6 @@ const Tutorial = () => {
     gridLayout.init(data);
     gridLayout.execute()
     // console.log(data);
-
-
   }
 
   const initGraph = (width, height) => {
@@ -276,18 +274,18 @@ const Tutorial = () => {
             width: 150
           }
         },
-        defaultEdge: {
-          style: {
-            stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)',
-            cursor: 'pointer',
-          },
-          labelCfg: {
-            autoRotate: true,
-            style: {
-              fill: '#fff',
-            }
-          },
-        },
+        // defaultEdge: {
+        //   style: {
+        //     stroke: 'l(0) 0:rgba(255, 255, 255, 0) 0.5:#7ec2f3 1:rgba(255, 255, 255, 0)',
+        //     cursor: 'pointer',
+        //   },
+        //   labelCfg: {
+        //     autoRotate: true,
+        //     style: {
+        //       fill: '#fff',
+        //     }
+        //   },
+        // },
         nodeStateStyles: {
           hover: {
             stroke: 'red',
@@ -313,6 +311,8 @@ const Tutorial = () => {
       initEdgeEvent();
     }
   };
+
+  
 
   const initNode = () => {
     G6.registerNode(
